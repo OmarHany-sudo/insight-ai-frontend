@@ -14,7 +14,8 @@ export async function apiFetch<T>(
   options: RequestInit = {},
   token?: string | null
 ): Promise<T> {
-  const res = await fetch(`${API_BASE_URL}${path}`, {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  const res = await fetch(`${API_BASE_URL}${cleanPath}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",
